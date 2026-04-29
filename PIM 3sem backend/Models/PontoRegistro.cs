@@ -7,8 +7,8 @@ namespace PIM_3sem_backend.Models
         public Guid Id { get; private set; }
         public Guid IdFuncionario { get; private set; }
         public DateOnly Data { get; private set; }
-        public DateTime HoraEntrada { get; private set; }
-        public DateTime? HoraSaida { get; private set; }
+        public DateTimeOffset HoraEntrada { get; private set; }
+        public DateTimeOffset? HoraSaida { get; private set; }
         public string Status { get; private set; }
 
         public PontoRegistro(Guid idFuncionario, string status)
@@ -22,9 +22,10 @@ namespace PIM_3sem_backend.Models
             Id = Guid.NewGuid();
             IdFuncionario = idFuncionario;
             Data = DateOnly.FromDateTime(DateTime.UtcNow);
-            HoraEntrada = DateTime.UtcNow;
+            HoraEntrada = DateTimeOffset.UtcNow;
             HoraSaida = null;
             Status = status;
         }
+        
     }
 }
