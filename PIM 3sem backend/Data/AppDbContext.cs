@@ -103,7 +103,7 @@ namespace PIM_3sem_backend.Data
 
                 entity.Property(s => s.Valor)
                     .IsRequired()
-                    .HasColumnName("decimal(10,2)");
+                    .HasColumnType("decimal(10,2)");
 
                 entity.Property(s => s.DataInicio)
                     .IsRequired();
