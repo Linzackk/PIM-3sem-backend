@@ -1,6 +1,0 @@
-@PIM_3sem_backend_HostAddress = http://localhost:5110
-
-GET {{PIM_3sem_backend_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
