@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PIM_3sem_backend.Data;
+using PIM_3sem_backend.Middlewares;
 using PIM_3sem_backend.Repositories.Departamentos;
 using PIM_3sem_backend.Repositories.Perfis;
 using PIM_3sem_backend.Services.Departamentos;
@@ -43,6 +44,8 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 
