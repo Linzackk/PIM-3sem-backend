@@ -9,7 +9,9 @@ namespace PIM_3sem_backend.Models
         public decimal Salario { get; private set; }
         public string Cargo { get; private set; }
         public Guid IdDepartamento { get; private set; }
+        public Departamento Departamento { get; private set; }
         public Guid? IdGerente { get; private set; }
+        public Funcionario Gerente { get; private set; }
 
         public Funcionario(string nome, decimal salario, string cargo, Guid idDepartamento, Guid? idGerente)
         {
