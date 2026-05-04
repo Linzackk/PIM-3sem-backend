@@ -1,4 +1,4 @@
-﻿using PIM_3sem_backend.DTOs.Perfis;
+﻿using PIM_3sem_backend.DTOs.Departamentos;
 
 namespace PIM_3sem_backend.Services.Departamentos
 {

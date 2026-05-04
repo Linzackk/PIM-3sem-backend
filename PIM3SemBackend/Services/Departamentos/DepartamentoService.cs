@@ -1,4 +1,4 @@
-﻿using PIM_3sem_backend.DTOs.Perfis;
+﻿using PIM_3sem_backend.DTOs.Departamentos;
 using PIM_3sem_backend.Exceptions;
 using PIM_3sem_backend.Models;
 using PIM_3sem_backend.Repositories.Departamentos;
