@@ -42,7 +42,7 @@ namespace PIM_3sem_backend.Services.Usuarios
         public async Task<UsuarioResponseDTO> CriarUsuario(UsuarioCreateDTO createDTO)
         {
             var novoUsuario = CriarUsuarioModel(createDTO);
-            var perfil = _perfilService.ObterPorId(createDTO.IdPerfil);
+            var perfil = await _perfilService.ObterPorId(createDTO.IdPerfil);
 
             await _repository.CriarUsuario(novoUsuario);
             return CriarUsuarioResponse(novoUsuario);

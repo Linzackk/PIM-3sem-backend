@@ -18,7 +18,7 @@ namespace PIM_3sem_backend.Controllers
         public async Task<IActionResult> CriarNovoUsuario([FromBody] UsuarioCreateDTO novoUsuario)
         {
             var usuarioCriado = await _service.CriarUsuario(novoUsuario);
-            return CreatedAtAction(nameof(ObterPorId), new { Id = usuarioCriado.Id }, usuarioCriado);
+            return CreatedAtAction(nameof(ObterPorId), new { usuarioId = usuarioCriado.Id }, usuarioCriado);
         }
 
         [HttpGet("{usuarioId}")]

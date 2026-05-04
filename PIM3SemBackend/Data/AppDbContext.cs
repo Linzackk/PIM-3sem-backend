@@ -26,11 +26,6 @@ namespace PIM_3sem_backend.Data
                 entity.Property(p => p.Nome)
                     .IsRequired()
                     .HasMaxLength(100);
-
-                entity.HasMany<Usuario>()
-                    .WithOne()
-                    .HasForeignKey(u => u.IdPerfil)
-                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Departamento>(entity =>
@@ -63,6 +58,11 @@ namespace PIM_3sem_backend.Data
 
                 entity.Property(u => u.Ativo)
                     .IsRequired();
+
+                entity.HasOne(u => u.Perfil)
+                    .WithMany()
+                    .HasForeignKey(u => u.IdPerfil)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Funcionario>(entity =>
