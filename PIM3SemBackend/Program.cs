@@ -3,8 +3,10 @@ using PIM_3sem_backend.Data;
 using PIM_3sem_backend.Middlewares;
 using PIM_3sem_backend.Repositories.Departamentos;
 using PIM_3sem_backend.Repositories.Perfis;
+using PIM_3sem_backend.Repositories.Usuarios;
 using PIM_3sem_backend.Services.Departamentos;
 using PIM_3sem_backend.Services.Perfis;
+using PIM_3sem_backend.Services.Usuarios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,9 @@ builder.Services.AddScoped<IPerfilService, PerfilService>();
 
 builder.Services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
 builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
