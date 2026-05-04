@@ -28,5 +28,10 @@ namespace PIM_3sem_backend.Models
             IdPerfil = idPerfil;
             Ativo = true;
         }
+
+        public void AlterarAcesso()
+        {
+            Ativo = Ativo ? false : true;
+        }
     }
 }
