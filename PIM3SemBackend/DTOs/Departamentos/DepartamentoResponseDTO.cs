@@ -1,4 +1,4 @@
-﻿namespace PIM_3sem_backend.DTOs.Perfis
+﻿namespace PIM_3sem_backend.DTOs.Departamentos
 {
     public class DepartamentoResponseDTO
     {

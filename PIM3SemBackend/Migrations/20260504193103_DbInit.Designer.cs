@@ -12,7 +12,7 @@ using PIM_3sem_backend.Data;
 namespace PIM_3sem_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260429185902_DbInit")]
+    [Migration("20260504193103_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -199,11 +199,13 @@ namespace PIM_3sem_backend.Migrations
 
             modelBuilder.Entity("PIM_3sem_backend.Models.Usuario", b =>
                 {
-                    b.HasOne("PIM_3sem_backend.Models.Perfil", null)
+                    b.HasOne("PIM_3sem_backend.Models.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("IdPerfil")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618
         }

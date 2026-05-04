@@ -196,11 +196,13 @@ namespace PIM_3sem_backend.Migrations
 
             modelBuilder.Entity("PIM_3sem_backend.Models.Usuario", b =>
                 {
-                    b.HasOne("PIM_3sem_backend.Models.Perfil", null)
+                    b.HasOne("PIM_3sem_backend.Models.Perfil", "Perfil")
                         .WithMany()
                         .HasForeignKey("IdPerfil")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618
         }

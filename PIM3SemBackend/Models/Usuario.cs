@@ -8,6 +8,7 @@ namespace PIM_3sem_backend.Models
         public string Email { get; private set; }
         public string Senha { get; private set; }
         public Guid IdPerfil { get; private set; }
+        public Perfil Perfil { get; private set; }
         public bool Ativo { get; private set; }
 
         public Usuario(string email, string senha, Guid idPerfil)
@@ -26,6 +27,11 @@ namespace PIM_3sem_backend.Models
             Senha = senha;
             IdPerfil = idPerfil;
             Ativo = true;
+        }
+
+        public void AlterarAcesso()
+        {
+            Ativo = Ativo ? false : true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PIM_3sem_backend.Exceptions;
+﻿using PIM_3sem_backend.Exceptions.BadRequest;
+using PIM_3sem_backend.Exceptions.NotFound;
 
 namespace PIM_3sem_backend.Middlewares
 {
