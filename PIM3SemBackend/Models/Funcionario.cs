@@ -37,5 +37,21 @@ namespace PIM_3sem_backend.Models
             IdDepartamento = idDepartamento;
             IdGerente = idGerente;
         }
+
+        public void AtualizarSalario(decimal novoSalario)
+        {
+            if (novoSalario <= 0)
+                throw new ModelInvalidoException("Salario deve ser maior que 0.");
+
+            Salario = novoSalario;
+        }
+
+        public void AtualizarCargo(string novoCargo)
+        {
+            if (string.IsNullOrEmpty(novoCargo))
+                throw new ModelInvalidoException("Cargo não pode estar vazio.");
+
+            Cargo = novoCargo;
+        }
     }
 }
