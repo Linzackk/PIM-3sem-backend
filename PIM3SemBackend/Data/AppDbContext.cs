@@ -31,12 +31,6 @@ namespace PIM_3sem_backend.Data
                     .WithOne()
                     .HasForeignKey(u => u.IdPerfil)
                     .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasData(
-                    new Perfil("CEO"),
-                    new Perfil("Gerente"),
-                    new Perfil("Funcionario")
-                );
             });
 
             modelBuilder.Entity<Departamento>(entity =>
