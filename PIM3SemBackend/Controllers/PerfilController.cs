@@ -7,8 +7,8 @@ namespace PIM_3sem_backend.Controllers
     [Route("api/[controller]")]
     public class PerfilController : ControllerBase
     {
-        private readonly PerfilService _service;
-        public PerfilController(PerfilService service)
+        private readonly IPerfilService _service;
+        public PerfilController(IPerfilService service)
         {
             _service = service;
         }

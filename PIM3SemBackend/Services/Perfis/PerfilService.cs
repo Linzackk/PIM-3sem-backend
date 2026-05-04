@@ -7,8 +7,8 @@ namespace PIM_3sem_backend.Services.Perfis
 {
     public class PerfilService : IPerfilService
     {
-        private readonly PerfilRepository _repository;
-        public PerfilService(PerfilRepository repository)
+        private readonly IPerfilRepository _repository;
+        public PerfilService(IPerfilRepository repository)
         {
             _repository = repository;
         }
