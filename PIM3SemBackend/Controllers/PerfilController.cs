@@ -1,0 +1,30 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using PIM_3sem_backend.Services.Perfis;
+
+namespace PIM_3sem_backend.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PerfilController : ControllerBase
+    {
+        private readonly PerfilService _service;
+        public PerfilController(PerfilService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet("{perfilId}")]
+        public async Task<IActionResult> ObterPorId(Guid perfilId)
+        {
+            var perfil = await _service.ObterPorId(perfilId);
+            return Ok(perfil);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ObterTodos()
+        {
+            var perfis = await _service.ObterTodos();
+            return Ok(perfis);
+        }
+    }
+}
