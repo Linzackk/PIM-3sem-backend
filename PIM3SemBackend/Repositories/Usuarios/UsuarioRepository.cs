@@ -20,12 +20,16 @@ namespace PIM_3sem_backend.Repositories.Usuarios
 
         public Task<Usuario?> ObterPorId(Guid usuarioId)
         {
-            return _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.Id.Equals(usuarioId));
+            return _context.Usuarios
+                    .Include(u => u.Perfil)
+                .FirstOrDefaultAsync(usuario => usuario.Id.Equals(usuarioId));
         }
 
         public Task<List<Usuario>> ObterTodos()
         {
-            return _context.Usuarios.ToListAsync();
+            return _context.Usuarios
+                    .Include(u  => u.Perfil)
+                .ToListAsync();
         }
 
         public async Task AtualizarUsuario(Usuario usuarioAtualizado)
