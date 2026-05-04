@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PIM_3sem_backend.Data;
+using PIM_3sem_backend.Repositories.Perfis;
+using PIM_3sem_backend.Services.Perfis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
+builder.Services.AddScoped<IPerfilService, PerfilService>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+
 
 var app = builder.Build();
 
@@ -20,6 +26,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    DbSeeder.Seed(context);
 }
 
 app.UseHttpsRedirection();
