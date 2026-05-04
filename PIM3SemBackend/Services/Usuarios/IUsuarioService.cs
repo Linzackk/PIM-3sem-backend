@@ -7,7 +7,7 @@ namespace PIM_3sem_backend.Services.Usuarios
         Task CriarUsuario(UsuarioCreateDTO novoUsuario);
         Task<UsuarioResponseDTO> ObterPorId(Guid usuarioId);
         Task<IReadOnlyCollection<UsuarioResponseDTO>> ObterTodos();
-        Task DesativarAcesso();
+        Task AlterarAcesso(Guid usuarioId);
         Task RemoverUsuario(Guid usuarioId);
     }
 }
