@@ -21,7 +21,7 @@ namespace PIM_3sem_backend.Controllers
             return CreatedAtAction(nameof(ObterPorId), new { funcionarioId = funcionarioCriado.Id }, funcionarioCriado);
         }
 
-        [HttpGet("{funcionarioId")]
+        [HttpGet("{funcionarioId}")]
         public async Task<IActionResult> ObterPorId(Guid funcionarioId)
         {
             var funcionario = await _service.ObterPorId(funcionarioId);

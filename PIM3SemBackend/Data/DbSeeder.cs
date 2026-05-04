@@ -34,7 +34,7 @@ namespace PIM_3sem_backend.Data
 
         private static List<Departamento> AdicionarDepartamentos(AppDbContext context)
         {
-            var departamentosExistentes = context.Perfis.Select(d => d.Nome).ToHashSet();
+            var departamentosExistentes = context.Departamentos.Select(d => d.Nome).ToHashSet();
             var departamentosParaAdicionar = new[] { "T.I", "RH", "Marketing", "Financeiro" }
                 .Where(nome => !departamentosExistentes.Contains(nome))
                 .Select(nome => new Departamento(nome))

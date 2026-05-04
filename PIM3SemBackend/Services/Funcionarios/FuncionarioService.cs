@@ -30,8 +30,8 @@ namespace PIM_3sem_backend.Services.Funcionarios
                 Nome = funcionario.Nome,
                 Salario = funcionario.Salario,
                 Cargo = funcionario.Cargo,
-                Departamento = funcionario.Departamento.Nome,
-                Gerente = funcionario.Gerente.Nome ?? "N/A"
+                Departamento = funcionario.Departamento?.Nome ?? "N/A",
+                Gerente = funcionario.Gerente?.Nome ?? "N/A"
             };
         }
         private async Task<Funcionario> BuscarFuncionario(Guid funcionarioId)
