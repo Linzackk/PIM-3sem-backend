@@ -4,7 +4,7 @@ namespace PIM_3sem_backend.Services.Usuarios
 {
     public interface IUsuarioService
     {
-        Task CriarUsuario(UsuarioCreateDTO novoUsuario);
+        Task<UsuarioResponseDTO> CriarUsuario(UsuarioCreateDTO novoUsuario);
         Task<UsuarioResponseDTO> ObterPorId(Guid usuarioId);
         Task<IReadOnlyCollection<UsuarioResponseDTO>> ObterTodos();
         Task AlterarAcesso(Guid usuarioId);

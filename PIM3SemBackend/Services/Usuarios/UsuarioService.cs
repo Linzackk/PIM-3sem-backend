@@ -39,12 +39,13 @@ namespace PIM_3sem_backend.Services.Usuarios
             return usuario;
         }
 
-        public async Task CriarUsuario(UsuarioCreateDTO createDTO)
+        public async Task<UsuarioResponseDTO> CriarUsuario(UsuarioCreateDTO createDTO)
         {
             var novoUsuario = CriarUsuarioModel(createDTO);
             var perfil = _perfilService.ObterPorId(createDTO.IdPerfil);
 
             await _repository.CriarUsuario(novoUsuario);
+            return CriarUsuarioResponse(novoUsuario);
         }
 
         public async Task<UsuarioResponseDTO> ObterPorId(Guid usuarioId)
