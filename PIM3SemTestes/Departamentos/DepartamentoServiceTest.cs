@@ -35,5 +35,29 @@ namespace PIM3SemTestes.Departamentos
             Assert.Equal(departamento.Nome, resultado.Nome);
             Assert.Equal(departamento.Id, resultado.Id);
         }
+
+        [Fact]
+        public async Task DeveBuscarTodosDepartamentos()
+        {
+            var departamentos = new List<Departamento>()
+            {
+                CriarDepartamentoModel(),
+                CriarDepartamentoModel(),
+                CriarDepartamentoModel(),
+                CriarDepartamentoModel()
+            };
+
+            var mock = new Mock<IDepartamentoRepository>();
+            mock.Setup(x => x.ObterTodos())
+                .ReturnsAsync(departamentos);
+
+            var service = new DepartamentoService(mock.Object);
+
+            var resultado = await service.ObterTodos();
+
+            Assert.NotNull(resultado);
+            Assert.Equal(departamentos.Count, resultado.Count);
+        }
     }
 }
+
