@@ -62,9 +62,12 @@ namespace PIM_3sem_backend.Services.Funcionarios
 
             var usuarioCriado = await _usuarioService.CriarUsuario(novoUsuario);
 
-            if (usuarioCriado.Perfil != "Funcionario")
+            if (!novoFuncionario.IdGerente.HasValue && usuarioCriado.Perfil == "Funcionario")
+                throw new BadRequestException("Um Funcionário deve ter um Gerente.");
+
+            if (usuarioCriado.Perfil == "Funcionario")
             {
-                await BuscarFuncionario((Guid)novoFuncionario.IdGerente);
+                _ = await BuscarFuncionario((Guid)novoFuncionario.IdGerente);
             }
 
             var funcionario = CriarModelFuncionario(novoFuncionario, usuarioCriado.Id);

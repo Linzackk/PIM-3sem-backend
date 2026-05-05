@@ -22,7 +22,7 @@ namespace PIM_3sem_backend.Middlewares
             }
             catch (Exception ex)
             {
-                HandleException(context, ex);
+                await HandleException(context, ex);
             }
         }
 
