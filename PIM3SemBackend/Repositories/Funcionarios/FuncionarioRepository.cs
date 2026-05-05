@@ -22,6 +22,7 @@ namespace PIM_3sem_backend.Repositories.Funcionarios
             return await _context.Funcionarios
                 .Include(f => f.Departamento)
                 .Include(f => f.Gerente)
+                .Include(f => f.Usuario)
                 .FirstOrDefaultAsync(f => f.Id.Equals(funcionarioId));
         }
 
