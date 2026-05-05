@@ -127,5 +127,16 @@ namespace PIM_3sem_backend.Services.Funcionarios
 
             await _repository.RemoverFuncionario(funcionario);
         }
+
+        public async Task<IReadOnlyCollection<FuncionarioResponseDTO>> ObterTodosGerentes()
+        {
+            var gerentes = await _repository.ObterTodosGerentes();
+            var response = new List<FuncionarioResponseDTO>();
+
+            foreach (var gerente in gerentes)
+                response.Add(CriarResponse(gerente));
+
+            return response;
+        }
     }
 }

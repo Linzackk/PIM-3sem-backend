@@ -37,6 +37,17 @@ namespace PIM_3sem_backend.Repositories.Funcionarios
                 .ToListAsync();
         }
 
+        public async Task<List<Funcionario>> ObterTodosGerentes()
+        {
+            return await _context.Funcionarios
+                .Include(f => f.Departamento)
+                .Include(f => f.Gerente)
+                .Include(f => f.Usuario)
+                    .ThenInclude(u => u.Perfil)
+                .Where(f => f.Usuario.Perfil.Nome== "Gerente")
+                .ToListAsync();
+        }
+
         public async Task<List<Funcionario>> ObterFuncionarioDoGerente(Guid gerenteId)
         {
             var funcionarios = await _context.Funcionarios
