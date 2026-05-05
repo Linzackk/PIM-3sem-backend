@@ -19,7 +19,7 @@ namespace PIM_3sem_backend.Services.Funcionarios
 
         private Funcionario CriarModelFuncionario(FuncionarioCreateDTO novoFuncionario)
         {
-            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente);
+            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente, Guid.Empty);
         }
 
         private FuncionarioResponseDTO CriarResponse(Funcionario funcionario)
