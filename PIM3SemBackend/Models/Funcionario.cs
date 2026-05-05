@@ -12,8 +12,10 @@ namespace PIM_3sem_backend.Models
         public Departamento Departamento { get; private set; }
         public Guid? IdGerente { get; private set; }
         public Funcionario Gerente { get; private set; }
+        public Guid IdUsuario { get; private set; }
+        public Usuario Usuario { get; private set; }
 
-        public Funcionario(string nome, decimal salario, string cargo, Guid idDepartamento, Guid? idGerente)
+        public Funcionario(string nome, decimal salario, string cargo, Guid idDepartamento, Guid? idGerente, Guid idUsuario)
         {
             if (string.IsNullOrEmpty(nome))
                 throw new ModelInvalidoException("Nome não pode estar vazio.");
@@ -30,12 +32,16 @@ namespace PIM_3sem_backend.Models
             if (idGerente.HasValue && idGerente.Value == Guid.Empty)
                 throw new ModelInvalidoException("ID do Gerente inválido.");
 
+            if (idUsuario == Guid.Empty)
+                throw new ModelInvalidoException("ID do Usuário inválido.");
+
             Id = Guid.NewGuid();
             Nome = nome;
             Salario = salario;
             Cargo = cargo;
             IdDepartamento = idDepartamento;
             IdGerente = idGerente;
+            IdUsuario = idUsuario;
         }
 
         public void AtualizarSalario(decimal novoSalario)
