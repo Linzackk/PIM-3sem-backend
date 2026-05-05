@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIM3SemBackend", "PIM3SemBackend\PIM3SemBackend.csproj", "{166505AA-FEC7-454D-A426-5DB79E349456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIM3SemTestes", "PIM3SemTestes\PIM3SemTestes.csproj", "{910590ED-D48C-4637-9876-66F6FCFE9A28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{166505AA-FEC7-454D-A426-5DB79E349456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{166505AA-FEC7-454D-A426-5DB79E349456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{166505AA-FEC7-454D-A426-5DB79E349456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{910590ED-D48C-4637-9876-66F6FCFE9A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{910590ED-D48C-4637-9876-66F6FCFE9A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{910590ED-D48C-4637-9876-66F6FCFE9A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{910590ED-D48C-4637-9876-66F6FCFE9A28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
