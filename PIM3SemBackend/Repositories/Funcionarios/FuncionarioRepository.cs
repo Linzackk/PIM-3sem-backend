@@ -23,12 +23,18 @@ namespace PIM_3sem_backend.Repositories.Funcionarios
                 .Include(f => f.Departamento)
                 .Include(f => f.Gerente)
                 .Include(f => f.Usuario)
+                    .ThenInclude(u => u.Perfil)
                 .FirstOrDefaultAsync(f => f.Id.Equals(funcionarioId));
         }
 
         public async Task<List<Funcionario>> ObterTodos()
         {
-            return await _context.Funcionarios.ToListAsync();
+            return await _context.Funcionarios
+                .Include(f => f.Departamento)
+                .Include(f => f.Gerente)
+                .Include(f => f.Usuario)
+                    .ThenInclude(u => u.Perfil)
+                .ToListAsync();
         }
 
         public async Task<List<Funcionario>> ObterFuncionarioDoGerente(Guid gerenteId)
@@ -36,6 +42,8 @@ namespace PIM_3sem_backend.Repositories.Funcionarios
             var funcionarios = await _context.Funcionarios
                 .Include(f => f.Departamento)
                 .Include(f => f.Gerente)
+                .Include(f => f.Usuario)
+                    .ThenInclude(u => u.Perfil)
                 .Where(f => f.IdGerente.Equals(gerenteId))
                 .AsNoTracking()
                 .ToListAsync();
