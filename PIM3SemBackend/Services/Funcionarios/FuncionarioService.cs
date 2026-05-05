@@ -1,9 +1,11 @@
 ﻿using PIM_3sem_backend.DTOs.Funcionarios;
+using PIM_3sem_backend.DTOs.Usuarios;
 using PIM_3sem_backend.Exceptions.BadRequest;
 using PIM_3sem_backend.Exceptions.NotFound;
 using PIM_3sem_backend.Models;
 using PIM_3sem_backend.Repositories.Funcionarios;
 using PIM_3sem_backend.Services.Departamentos;
+using PIM_3sem_backend.Services.Usuarios;
 
 namespace PIM_3sem_backend.Services.Funcionarios
 {
@@ -11,15 +13,17 @@ namespace PIM_3sem_backend.Services.Funcionarios
     {
         private readonly IFuncionarioRepository _repository;
         private readonly IDepartamentoService _departamentoService;
-        public FuncionarioService(IFuncionarioRepository repository, IDepartamentoService departamentoService)
+        private readonly IUsuarioService _usuarioService;
+        public FuncionarioService(IFuncionarioRepository repository, IDepartamentoService departamentoService, IUsuarioService usuarioService)
         {
             _repository = repository;
             _departamentoService = departamentoService;
+            _usuarioService = usuarioService;
         }
 
-        private Funcionario CriarModelFuncionario(FuncionarioCreateDTO novoFuncionario)
+        private Funcionario CriarModelFuncionario(FuncionarioCreateDTO novoFuncionario, Guid idUsuario)
         {
-            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente);
+            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente, idUsuario);
         }
 
         private FuncionarioResponseDTO CriarResponse(Funcionario funcionario)
@@ -31,7 +35,9 @@ namespace PIM_3sem_backend.Services.Funcionarios
                 Salario = funcionario.Salario,
                 Cargo = funcionario.Cargo,
                 Departamento = funcionario.Departamento?.Nome ?? "N/A",
-                Gerente = funcionario.Gerente?.Nome ?? "N/A"
+                Gerente = funcionario.Gerente?.Nome ?? "N/A",
+                Email = funcionario.Usuario.Email,
+                Perfil = funcionario.Usuario.Perfil.Nome
             };
         }
         private async Task<Funcionario> BuscarFuncionario(Guid funcionarioId)
@@ -46,12 +52,25 @@ namespace PIM_3sem_backend.Services.Funcionarios
         public async Task<FuncionarioResponseDTO> CriarFuncionario(FuncionarioCreateDTO novoFuncionario)
         {
             var departamento = await _departamentoService.ObterPorId(novoFuncionario.IdDepartamento);
-            if (novoFuncionario.IdGerente != null)
+
+            var novoUsuario = new UsuarioCreateDTO() 
+            { 
+                Email = novoFuncionario.Email,
+                Senha = novoFuncionario.Senha,
+                IdPerfil = novoFuncionario.IdPerfil
+            };
+
+            var usuarioCriado = await _usuarioService.CriarUsuario(novoUsuario);
+
+            if (!novoFuncionario.IdGerente.HasValue && usuarioCriado.Perfil == "Funcionario")
+                throw new BadRequestException("Um Funcionário deve ter um Gerente.");
+
+            if (usuarioCriado.Perfil == "Funcionario")
             {
-                var gerente = await BuscarFuncionario((Guid)novoFuncionario.IdGerente);
+                _ = await BuscarFuncionario((Guid)novoFuncionario.IdGerente);
             }
 
-            var funcionario = CriarModelFuncionario(novoFuncionario);
+            var funcionario = CriarModelFuncionario(novoFuncionario, usuarioCriado.Id);
             await _repository.CriarFuncionario(funcionario);
 
             return CriarResponse(funcionario);
@@ -107,6 +126,17 @@ namespace PIM_3sem_backend.Services.Funcionarios
             var funcionario = await BuscarFuncionario(funcionarioId);
 
             await _repository.RemoverFuncionario(funcionario);
+        }
+
+        public async Task<IReadOnlyCollection<FuncionarioResponseDTO>> ObterTodosGerentes()
+        {
+            var gerentes = await _repository.ObterTodosGerentes();
+            var response = new List<FuncionarioResponseDTO>();
+
+            foreach (var gerente in gerentes)
+                response.Add(CriarResponse(gerente));
+
+            return response;
         }
     }
 }

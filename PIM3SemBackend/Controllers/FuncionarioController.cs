@@ -35,11 +35,18 @@ namespace PIM_3sem_backend.Controllers
             return Ok(funcionarios);
         }
 
-        [HttpGet("Gerente/{gerenteId}")]
+        [HttpGet("Gerentes/{gerenteId}")]
         public async Task<IActionResult> ObterFuncionariosDoGerente(Guid gerenteId)
         {
             var funcionarios = await _service.ObterFuncionarioDoGerente(gerenteId);
             return Ok(funcionarios);
+        }
+
+        [HttpGet("Gerentes")]
+        public async Task<IActionResult> ObterTodosGerentes()
+        {
+            var gerentes = await _service.ObterTodosGerentes();
+            return Ok(gerentes);
         }
 
         [HttpPatch("{funcionarioId}")]

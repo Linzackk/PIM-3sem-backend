@@ -10,5 +10,6 @@ namespace PIM_3sem_backend.Services.Funcionarios
         Task<IReadOnlyCollection<FuncionarioResponseDTO>> ObterFuncionarioDoGerente(Guid gerenteId);
         Task AtualizarFuncionario(FuncionarioUpdateDTO novasInformacoes, Guid funcionarioId);
         Task RemoverFuncionario(Guid funcionarioId);
+        Task<IReadOnlyCollection<FuncionarioResponseDTO>> ObterTodosGerentes();
     }
 }

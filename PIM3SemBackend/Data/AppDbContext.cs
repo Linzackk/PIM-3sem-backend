@@ -79,6 +79,9 @@ namespace PIM_3sem_backend.Data
                 entity.Property(f => f.IdDepartamento)
                     .IsRequired();
 
+                entity.Property(f => f.IdUsuario)
+                    .IsRequired();
+
                 entity.HasOne(f => f.Departamento)
                     .WithMany()
                     .HasForeignKey(f => f.IdDepartamento)
@@ -93,6 +96,12 @@ namespace PIM_3sem_backend.Data
                 entity.HasMany<PontoRegistro>()
                     .WithOne()
                     .HasForeignKey(pr => pr.IdFuncionario)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(f => f.Usuario)
+                    .WithOne()
+                    .HasForeignKey<Funcionario>(f => f.IdUsuario)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
             });

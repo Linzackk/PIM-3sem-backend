@@ -7,5 +7,8 @@
         public string Cargo { get; set; }
         public Guid IdDepartamento { get; set; }
         public Guid? IdGerente { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public Guid IdPerfil { get; set; }
     }
 }
