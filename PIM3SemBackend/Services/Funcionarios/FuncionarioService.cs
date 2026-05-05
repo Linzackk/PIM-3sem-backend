@@ -21,9 +21,9 @@ namespace PIM_3sem_backend.Services.Funcionarios
             _usuarioService = usuarioService;
         }
 
-        private Funcionario CriarModelFuncionario(FuncionarioCreateDTO novoFuncionario)
+        private Funcionario CriarModelFuncionario(FuncionarioCreateDTO novoFuncionario, Guid idUsuario)
         {
-            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente, Guid.Empty);
+            return new Funcionario(novoFuncionario.Nome, novoFuncionario.Salario, novoFuncionario.Cargo, novoFuncionario.IdDepartamento, novoFuncionario.IdGerente, idUsuario);
         }
 
         private FuncionarioResponseDTO CriarResponse(Funcionario funcionario)
@@ -67,7 +67,7 @@ namespace PIM_3sem_backend.Services.Funcionarios
                 await BuscarFuncionario((Guid)novoFuncionario.IdGerente);
             }
 
-            var funcionario = CriarModelFuncionario(novoFuncionario);
+            var funcionario = CriarModelFuncionario(novoFuncionario, usuarioCriado.Id);
             await _repository.CriarFuncionario(funcionario);
 
             return CriarResponse(funcionario);
