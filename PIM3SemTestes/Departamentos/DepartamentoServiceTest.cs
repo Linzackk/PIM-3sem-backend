@@ -1,4 +1,5 @@
 ﻿using Moq;
+using PIM_3sem_backend.Exceptions.NotFound;
 using PIM_3sem_backend.Models;
 using PIM_3sem_backend.Repositories.Departamentos;
 using PIM_3sem_backend.Services.Departamentos;
@@ -34,6 +35,18 @@ namespace PIM3SemTestes.Departamentos
             Assert.NotNull(resultado);
             Assert.Equal(departamento.Nome, resultado.Nome);
             Assert.Equal(departamento.Id, resultado.Id);
+        }
+
+        [Fact]
+        public async Task DeveBuscarDepartamentoInexistente()
+        {
+            var mock = new Mock<IDepartamentoRepository>();
+            mock.Setup(x => x.ObterPorId(IdTeste))
+                .ReturnsAsync((Departamento?)null);
+
+            var service = new DepartamentoService(mock.Object);
+
+            await Assert.ThrowsAsync<DepartamentoNotFoundException>(() => service.ObterPorId(IdTeste));
         }
 
         [Fact]
