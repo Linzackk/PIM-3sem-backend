@@ -1,4 +1,5 @@
-﻿using PIM_3sem_backend.DTOs.Usuarios;
+﻿using PIM_3sem_backend.DTOs.Login;
+using PIM_3sem_backend.DTOs.Usuarios;
 using PIM_3sem_backend.Exceptions.NotFound;
 using PIM_3sem_backend.Models;
 using PIM_3sem_backend.Repositories.Usuarios;
@@ -79,5 +80,13 @@ namespace PIM_3sem_backend.Services.Usuarios
             await _repository.RemoverUsuario(usuario);
         }
 
+        public async Task<bool> FazerLogin(FazerLoginDTO login)
+        {
+            var loginRegistrado = await _repository.BuscarLogin(login.Email, login.Senha);
+            if (loginRegistrado == null)
+                throw new NotFoundException("Credenciais inválidas");
+
+            else return true;
+        }
     }
 }

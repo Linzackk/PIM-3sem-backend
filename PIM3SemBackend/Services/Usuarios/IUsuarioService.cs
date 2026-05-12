@@ -1,4 +1,5 @@
-﻿using PIM_3sem_backend.DTOs.Usuarios;
+﻿using PIM_3sem_backend.DTOs.Login;
+using PIM_3sem_backend.DTOs.Usuarios;
 
 namespace PIM_3sem_backend.Services.Usuarios
 {
@@ -9,5 +10,7 @@ namespace PIM_3sem_backend.Services.Usuarios
         Task<IReadOnlyCollection<UsuarioResponseDTO>> ObterTodos();
         Task AlterarAcesso(Guid usuarioId);
         Task RemoverUsuario(Guid usuarioId);
+
+        Task<bool> FazerLogin(FazerLoginDTO login);
     }
 }

@@ -43,5 +43,10 @@ namespace PIM_3sem_backend.Repositories.Usuarios
             _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Usuario?> BuscarLogin(string email, string senha)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Senha.Equals(senha));
+        }
     }
 }
