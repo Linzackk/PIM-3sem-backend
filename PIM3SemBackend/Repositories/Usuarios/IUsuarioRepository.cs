@@ -9,5 +9,6 @@ namespace PIM_3sem_backend.Repositories.Usuarios
         Task<List<Usuario>> ObterTodos();
         Task AtualizarUsuario(Usuario usuarioAtualizado);
         Task RemoverUsuario(Usuario usuario);
+        Task<Usuario?> BuscarLogin(string email, string senha);
     }
 }
